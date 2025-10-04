@@ -1,0 +1,52 @@
+# Database Setup:
+# Before running the application, create the MySQL database:
+# CREATE DATABASE IF NOT EXISTS nasa_exoplanet_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+spring:
+  application:
+    name: exovision-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/nasa_exoplanet_db?createDatabaseIfNotExist=true&serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 1846
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+# AI Service Configuration
+ai:
+  service:
+    url: http://localhost:8001
+    timeout: 5000
+
+# CORS Configuration
+cors:
+  allowed-origins: http://localhost:3000
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+# Logging
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.type: INFO
